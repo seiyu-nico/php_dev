@@ -3,6 +3,7 @@
 ```
 git https://github.com/seiyu-nico/php_dev.git
 cd php_dev
+cp docker-compose.yml.sample docker-compose.yml
 make init
 ```
 
