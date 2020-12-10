@@ -1,8 +1,8 @@
 # PHP用開発環境
 ## 使い方
 ```
-git clone https://github.com/seiyu-nico/laravel8_dev.git
-cd laravel8_dev
+git https://github.com/seiyu-nico/php_dev.git
+cd php_dev
 make init
 ```
 
