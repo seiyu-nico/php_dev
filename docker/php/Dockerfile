@@ -19,7 +19,7 @@ LABEL maintainer "seiyu-nico <yuseiishii141+docker@gmail.com>"
 
 RUN apk upgrade --update && \
     apk --no-cache --update add icu-dev autoconf make g++ gcc oniguruma-dev  && \
-    docker-php-ext-install  -j$(nproc) iconv intl mbstring pdo_mysql opcache && \
+    docker-php-ext-install  -j$(nproc) iconv intl mbstring pdo_mysql opcache mysqli && \
     pecl install xdebug-2.9.8 && \
     docker-php-ext-enable xdebug && \
     set -eux && \
@@ -35,6 +35,7 @@ RUN apk upgrade --update && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 WORKDIR /var/www
 COPY www.conf /usr/local/etc/php-fpm.d/www.conf
+COPY php.ini /usr/local/etc/php/php.ini
 
 ENV user tech
 ENV group tech
