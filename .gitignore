@@ -11,6 +11,10 @@ db/mysql_data/*
 redis/data/*
 !.gitkeep
 
+conf/nginx/*
+!.gitkeep
+!.sample.conf
+
 logs/*
 !.gitkeep
 
