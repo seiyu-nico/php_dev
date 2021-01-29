@@ -2,7 +2,7 @@ FROM php:7.4.12-fpm-alpine3.12
 LABEL maintainer "seiyu-nico <yuseiishii141+docker@gmail.com>"
 
 RUN apk upgrade --update && \
-    apk --no-cache --update add icu-dev autoconf make g++ gcc oniguruma-dev  && \
+    apk --no-cache --update add icu-dev autoconf make g++ gcc oniguruma-dev bash && \
     docker-php-ext-install  -j$(nproc) iconv intl mbstring pdo_mysql opcache mysqli && \
     pecl install xdebug-2.9.8 && \
     docker-php-ext-enable xdebug && \
@@ -15,7 +15,9 @@ RUN apk upgrade --update && \
     docker-php-ext-enable redis && \
     apk del autoconf g++ libtool make && \
     rm -rf /tmp/* && \
-    apk upgrade --update && apk --no-cache add icu-dev autoconf make g++ gcc curl
+    apk upgrade --update && apk --no-cache add icu-dev autoconf make g++ gcc curl && \
+    curl -sS https://get.symfony.com/cli/installer | bash && \
+    mv /root/.symfony/bin/symfony /usr/local/bin/symfony
 
 COPY --from=composer:2.0 /usr/bin/composer /usr/bin/composer
 
