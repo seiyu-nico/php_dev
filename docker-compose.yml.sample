@@ -58,6 +58,7 @@ services:
       - '443:443'
     environment:
       STAGE: 'local'
+      CLIENT_MAX_BODY_SIZE: '10M'
       DOMAINS: >-
         sample.localhost -> http://nginx:8000
       # FORCE_RENEW: 'true'
