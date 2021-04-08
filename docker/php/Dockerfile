@@ -2,7 +2,7 @@ FROM php:7.4.12-fpm-alpine3.12
 LABEL maintainer "seiyu-nico <yuseiishii141+docker@gmail.com>"
 
 RUN apk upgrade --update && \
-    apk --no-cache --update add icu-dev autoconf make g++ gcc oniguruma-dev bash && \
+    apk --no-cache --update add icu-dev autoconf make g++ gcc oniguruma-dev bash gmp-dev && \
     docker-php-ext-install  -j$(nproc) iconv intl mbstring pdo_mysql opcache mysqli gmp && \
     pecl install xdebug-2.9.8 && \
     docker-php-ext-enable xdebug && \
