@@ -3,7 +3,7 @@ LABEL maintainer "seiyu-nico <yuseiishii141+docker@gmail.com>"
 
 RUN apk upgrade --update && \
     apk --no-cache --update add icu-dev autoconf make g++ gcc oniguruma-dev bash && \
-    docker-php-ext-install  -j$(nproc) iconv intl mbstring pdo_mysql opcache mysqli && \
+    docker-php-ext-install  -j$(nproc) iconv intl mbstring pdo_mysql opcache mysqli gmp && \
     pecl install xdebug-2.9.8 && \
     docker-php-ext-enable xdebug && \
     set -eux && \
