@@ -6,16 +6,12 @@ services:
       - '127.0.0.1:9000:9000'
     volumes:
       - app:/var/www
-    environment:
-      TZ: Asia/Tokyo
     depends_on:
       - db
   node:
     build: ./docker/node
     volumes:
       - app:/home/tech/workspace
-    environment:
-      TZ: Asia/Tokyo
     tty: true
     depends_on:
       - php
@@ -24,7 +20,7 @@ services:
     environment:
       TZ: Asia/Tokyo
     ports:
-      - "127.0.0.1:8000:8000"
+      - "8000:8000"
     volumes:
       - app:/var/www
       - vhosts:/etc/nginx/conf.d
@@ -40,10 +36,10 @@ services:
       - mysql_init:/docker-entrypoint-initdb.d
       # 永続化するときにマウントするdir
       - mysql_data:/var/lib/mysql
+      # ダンプデータ置き場
+      - mysql_dump:/mysql_dump
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: tech
-      MYSQL_PASSWORD: tech
       TZ: Asia/Tokyo
   redis:
     image: "redis:latest"
@@ -60,7 +56,7 @@ services:
       STAGE: 'local'
       CLIENT_MAX_BODY_SIZE: '10M'
       DOMAINS: >-
-        sample.localhost -> http://nginx:8000
+        https.localhost -> http://nginx:8000
       # FORCE_RENEW: 'true'
     volumes:
       - ssl:/var/lib/https-portal
@@ -88,6 +84,11 @@ volumes:
     driver_opts:
       type: none
       device: $PWD/db/mysql_data
+      o: bind
+  mysql_dump:
+    driver_opts:
+      type: none
+      device: $PWD/db/mysql_dump
       o: bind
   redis:
     driver_opts:
