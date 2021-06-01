@@ -1,9 +1,10 @@
+  
 FROM php:7.4.12-fpm-alpine3.12 
 LABEL maintainer "seiyu-nico <yuseiishii141+docker@gmail.com>"
 
 RUN apk upgrade --update && \
-    apk --no-cache --update add icu-dev autoconf make g++ gcc oniguruma-dev bash && \
-    docker-php-ext-install  -j$(nproc) iconv intl mbstring pdo_mysql opcache mysqli && \
+    apk --no-cache --update add icu-dev autoconf make g++ gcc oniguruma-dev bash gmp-dev && \
+    docker-php-ext-install  -j$(nproc) iconv intl mbstring pdo_mysql opcache mysqli gmp && \
     pecl install xdebug-2.9.8 && \
     docker-php-ext-enable xdebug && \
     set -eux && \
@@ -17,7 +18,11 @@ RUN apk upgrade --update && \
     rm -rf /tmp/* && \
     apk upgrade --update && apk --no-cache add icu-dev autoconf make g++ gcc curl && \
     curl -sS https://get.symfony.com/cli/installer | bash && \
-    mv /root/.symfony/bin/symfony /usr/local/bin/symfony
+    mv /root/.symfony/bin/symfony /usr/local/bin/symfony && \
+    apk --update add tzdata && \
+    cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
+    apk del tzdata && \
+    rm -rf /var/cache/apk/*
 
 COPY --from=composer:2.0 /usr/bin/composer /usr/bin/composer
 
@@ -34,4 +39,3 @@ RUN deluser --remove-home www-data && \
     chown -R ${user}:${group} /var/run/ && \
     chown -R ${user}:${group} /var/log/
 USER ${user}
-

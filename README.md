@@ -1,12 +1,5 @@
 # PHP用開発環境
 ## 使い方
-```
-git https://github.com/seiyu-nico/php_dev.git
-cd php_dev
-cp docker-compose.yml.sample docker-compose.yml
-make init
-```
-
 - make initで余計なファイルの削除 && イメージビルト && 起動までを行う
   - 下記動作を行っている感じ
 
@@ -15,8 +8,6 @@ rm -rf 各種.gitkeep
 docker-compose build 
 docker-compose up -d 
 ```
-
-- 必要がなければsampleは削除しても問題ないです
 
 ## 設定の変更
 ### vhostsの追加
