@@ -66,7 +66,7 @@ services:
       STAGE: 'local'
       CLIENT_MAX_BODY_SIZE: '10M'
       DOMAINS: >-
-        https.localhost -> http://nginx:8000
+        sample.localhost -> http://nginx:8000
       # FORCE_RENEW: 'true'
     volumes:
       - ssl:/var/lib/https-portal

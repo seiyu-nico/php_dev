@@ -8,6 +8,12 @@ ssl/*
 db/mysql_data/*
 !.gitkeep
 
+db/mysql_dump/*
+!.gitkeep
+
+db/phpmyadmin/*
+!.gitkeep
+
 redis/data/*
 !.gitkeep
 
