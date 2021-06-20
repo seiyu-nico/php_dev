@@ -1,5 +1,10 @@
 # PHP用開発環境
 ## 使い方
+- ~/.bashrcに下記設定を記述します
+  - dockerコンテナ内での名前解決に使います。
+```bashrc:~/.bashrc
+export HOST_IP=$(hostname -I | awk '{print $1}')
+```
 - make initで余計なファイルの削除 && イメージビルト && 起動までを行う
   - 下記動作を行っている感じ
 
