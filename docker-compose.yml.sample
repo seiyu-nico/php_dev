@@ -8,6 +8,17 @@ services:
       - app:/var/www
     depends_on:
       - db
+  dnsmasq:
+    build: ./docker/dnsmasq
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+    environment:
+      HOST_IP: $HOST_IP
+      ADD_CONF: >-
+        # 追加で設定をする場合はここに記述
+    cap_add:
+      - NET_ADMIN
   node:
     build: ./docker/node
     volumes:
