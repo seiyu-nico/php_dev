@@ -2,8 +2,12 @@ version: '3.5'
 services:
   php:
     build: ./docker/php
-    ports:
-      - '127.0.0.1:9000:9000'
+    volumes:
+      - app:/var/www
+    depends_on:
+      - db
+  php80:
+    build: ./docker/php80
     volumes:
       - app:/var/www
     depends_on:
