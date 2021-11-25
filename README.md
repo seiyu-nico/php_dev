@@ -33,3 +33,11 @@ docker-compose up -d
 ```
 chrome://flags/#allow-insecure-localhost
 ```
+
+## PHPコンテナでのxdegub
+- .bashrcのデバッグするホストのIPアドレスをexportする処理を書く
+```.bashrc
+# wsl2でdockerを使いwindowsからデバッグする場合
+# 環境変数にwslから見たwindowsのIPを登録
+export XDEGUB_CLIENT_HOST=`ip route | grep 'default via' | grep -Eo '[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}'`
+```

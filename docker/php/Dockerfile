@@ -5,7 +5,7 @@ LABEL maintainer "seiyu-nico <yuseiishii141+docker@gmail.com>"
 RUN apk upgrade --update && \
     apk --no-cache --update add icu-dev autoconf make g++ gcc oniguruma-dev bash gmp-dev && \
     docker-php-ext-install  -j$(nproc) iconv intl mbstring pdo_mysql opcache mysqli gmp && \
-    pecl install xdebug-2.9.8 && \
+    pecl install xdebug && \
     docker-php-ext-enable xdebug && \
     set -eux && \
     apk add --update --no-cache git autoconf g++ libtool make libzip-dev libpng-dev libjpeg-turbo-dev freetype-dev && \
@@ -29,6 +29,7 @@ COPY --from=composer:2.0 /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www
 COPY www.conf /usr/local/etc/php-fpm.d/www.conf
 COPY php.ini /usr/local/etc/php/php.ini
+COPY xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 ENV user tech
 ENV group tech

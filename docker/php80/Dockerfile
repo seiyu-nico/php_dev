@@ -4,7 +4,7 @@ LABEL maintainer "seiyu-nico <yuseiishii141+docker@gmail.com>"
 RUN apk upgrade --update && \
     apk --no-cache --update add icu-dev autoconf make g++ gcc oniguruma-dev bash gmp-dev && \
     docker-php-ext-install  -j$(nproc) iconv intl mbstring pdo_mysql opcache mysqli gmp sockets && \
-    pecl install xdebug-3.0.0 && \
+    pecl install xdebug && \
     docker-php-ext-enable xdebug && \
     set -eux && \
     apk add --update --no-cache git autoconf g++ libtool make libzip-dev libpng-dev libjpeg-turbo-dev freetype-dev && \
